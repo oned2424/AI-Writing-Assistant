@@ -7,9 +7,9 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 const basePromptPrefix =
 `
-Write me a detailed table of contents for a blog post with the title below.
+下記のタイトルのブログ記事の詳細な目次を書いてください。
 
-Title:
+  タイトル:
 `
 
 const generateAction = async (req, res) => {
@@ -27,13 +27,13 @@ const generateAction = async (req, res) => {
   // I build Prompt #2.
   const secondPrompt = 
   `
-  Take the table of contents and title of the blog post below and generate a blog post written in thwe style of Paul Graham. Make it feel like a story. Don't just list the points. Go deep into each one. Explain why.
+  以下のブログ記事の目次とタイトルを参考に、ポールグラハムの文体で書かれたブログ記事を作成してください。ストーリーのある文章にしてください。ポイントを列挙するだけではいけません。一つ一つを深く掘り下げて、なぜそうなるのかを説明してください。
 
-  Title: ${req.body.userInput}
+  タイトル: ${req.body.userInput}
 
-  Table of Contents: ${basePromptOutput.text}
+  目次: ${basePromptOutput.text}
 
-  Blog Post:
+  ブログ:
   `
   
   // I call the OpenAI API a second time with Prompt #2
